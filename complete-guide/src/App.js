@@ -17,7 +17,8 @@ class App extends Component {
       { name: 'Max', age: 28 },
       { name: 'Bob', age: 18 }
     ],
-    otherStateProp: "hello"
+    otherStateProp: "hello",
+    showPersons: false
   }
 
   // using function syntax for methods would lead to errors if you tried to use 'this' in the method because it will no longer refer to the class
@@ -34,6 +35,11 @@ class App extends Component {
         { name: 'Bobby', age: 19 },
       ]
     })
+  }
+
+  togglePersonsHandler = () => {
+    const isShowing = this.state.showPersons;
+    this.setState({showPersons: !isShowing});
   }
 
   nameChangedHandler = (event) => {
@@ -67,18 +73,29 @@ class App extends Component {
         <button 
           style={buttonStyle}
           onClick={() => this.updatePersonsHandler('Maxi')}>Update Persons</button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}>I am awesome!</Person>
-        {/* using bind to pass data: */}
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.updatePersonsHandler.bind(this, 'Max!')}
-          changed={this.nameChangedHandler} />
-        <Person 
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age} />
+
+        <button 
+          style={buttonStyle}
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+
+        {/* The persons are not added to the DOM until they are first shown; after that they hidden but remain in the DOM */}
+        { this.state.showPersons ?
+          <div>
+            <Person 
+              name={this.state.persons[0].name} 
+              age={this.state.persons[0].age}>I am awesome!</Person>
+            {/* using bind to pass data: */}
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}
+              click={this.updatePersonsHandler.bind(this, 'Max!')}
+              changed={this.nameChangedHandler} />
+            <Person 
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age} />
+          </div>
+          : null
+        }
 
         {/* 
         Both these methods of passing parameters create a new function every render 
