@@ -62,33 +62,64 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    // Conditional Content "the javaScript way"
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age}>I am awesome!</Person>
+          <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}
+            changed={this.nameChangedHandler} />
+          <Person 
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age} />
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hello World!</h1>
         <p>This is JSX. Testing 123</p>
-        {/* no () on the button function so it is not executed immediately */}
-        {/* <button onClick={this.updatePersonsHandler}>Update Persons</button> */}
 
         {/* using an anonymous function to pass data: */}
         <button 
           style={buttonStyle}
-          onClick={() => this.updatePersonsHandler('Maxi')}>Update Persons</button>
+          onClick={() => this.updatePersonsHandler('Maxi')}>Update Persons 1</button>
 
+        {/* using bind to pass data: */}
+        <button 
+          style={buttonStyle}
+          onClick={this.updatePersonsHandler.bind(this, 'Max!')}>Update Persons 2</button>
+
+        {/* Both these methods of passing parameters create a new function every render 
+        If there are no parameters do not bind in the onClick it will cause more re-rendering than necessary because .bind() is called every time creating a new function
+        If the handler needs to be dynamic consider caching the handlers if performance becomes a problem.
+        For more information see:
+        https://www.freecodecamp.org/news/the-best-way-to-bind-event-handlers-in-react-282db2cf1530/ */}
+
+        {/* no () on the button function so it is not executed immediately */}
         <button 
           style={buttonStyle}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
 
-        {/* The persons are not added to the DOM until they are first shown; after that they hidden but remain in the DOM */}
+        {/* Conditional Content: 
+        The persons are not added to the DOM until they are first shown; after that they hidden but remain in the DOM */}
+
+        <h2>Conditional Content Using Ternary Operator</h2>
+
         { this.state.showPersons ?
           <div>
             <Person 
               name={this.state.persons[0].name} 
               age={this.state.persons[0].age}>I am awesome!</Person>
-            {/* using bind to pass data: */}
             <Person 
               name={this.state.persons[1].name} 
               age={this.state.persons[1].age}
-              click={this.updatePersonsHandler.bind(this, 'Max!')}
               changed={this.nameChangedHandler} />
             <Person 
               name={this.state.persons[2].name}
@@ -97,13 +128,9 @@ class App extends Component {
           : null
         }
 
-        {/* 
-        Both these methods of passing parameters create a new function every render 
-        If there are no parameters do not bind in the onClick it will cause more re-rendering than necessary because .bind() is called every time creating a new function
-        If the handler needs to be dynamic consider caching the handlers if performance becomes a problem.
-        For more information see:
-        https://www.freecodecamp.org/news/the-best-way-to-bind-event-handlers-in-react-282db2cf1530/ 
-        */}
+        <h2>Conditional Content "the javaScript way"</h2>
+        {persons}
+        
       </div>
     );
   }
