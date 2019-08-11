@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserInput from './UserInput/UserInput'
+import UserInput from './UserInput/UserInput';
+import ValidationComponent from './ValidationComponent/ValidationComponent';
 
 class App extends Component {
 
@@ -11,7 +12,8 @@ class App extends Component {
 
   textChangedHandler = (event) => {
     this.setState({
-      inputText: event.target.value
+      inputText: event.target.value,
+      textLength: event.target.value.length
     });
   }
 
@@ -31,6 +33,8 @@ class App extends Component {
         <UserInput
           text={this.state.inputText}
           onChange={this.textChangedHandler} />
+        <ValidationComponent
+          length={this.state.textLength} />
 
       </div>
     );
