@@ -13,3 +13,11 @@ My projects, assignments and notes from [React - The Complete Guide](https://www
 1. Make sure you are in the root folder for the project eg. `cd complete-guide`
 2. Install dependencies `npm install`
 3. Run the project on localhost `npm start`
+
+## Creating a new React App
+
+To create a new react project:
+
+`create-react-app app-name-here`
+
+Note: this will crete a new folder called `app-name-here` in the current directory.
