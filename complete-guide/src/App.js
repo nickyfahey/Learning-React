@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Radium, { StyleRoot } from 'radium';
-import './App.css';
+import styles from './App.css';
 import Person from './Person/Person.js'
 
 class App extends Component {
@@ -95,10 +95,13 @@ class App extends Component {
 
     const pClasses = [];
     if (this.state.persons.length < 3) {
-      pClasses.push('red');
+      // pClasses.push('red');
+      // use css modules:
+      pClasses.push(styles.red);
     }
     if (this.state.persons.length < 2) {
-      pClasses.push('bold');
+      // pClasses.push('bold');
+      pClasses.push(styles.bold);
     }
 
     // Conditional Content "the javaScript way"
@@ -128,7 +131,7 @@ class App extends Component {
     return (
       // Radium StyleRoot component needed for media queries to work
       // <StyleRoot>
-      <div className="App">
+      <div className={styles.App}>
         <h1>Everything is javaScript!</h1>
         {/* use join to get a valid css class list */}
         <p className={pClasses.join(' ')}>This is JSX.</p>
