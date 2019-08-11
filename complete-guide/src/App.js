@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   // using function syntax for methods would lead to errors if you tried to use 'this' in the method because it will no longer refer to the class
-  
+
   // updatePersonsHandler = (newName) => {
     // DON'T DO THIS: this.state.persons[0].name = 'Romana';
     // state should not be changed directly; react will not pick up on the change
@@ -38,14 +38,18 @@ class App extends Component {
   //   })
   // }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Nicky', age: 30 },
-        { name: event.target.value, age: 28 },
-        { name: 'Bobby', age: 19 },
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
+    
+    // make a copy of the person so we are not mutating the state directly
+    const person = { ...this.state.persons[personIndex] };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons });
   }
   
   togglePersonsHandler = () => {
@@ -88,6 +92,7 @@ class App extends Component {
             return <Person 
               key={person.id}
               click={() => this.deletePersonHandler(index)}
+              changed={(event) => this.nameChangedHandler(event, person.id)}
               name={person.name}
               age={person.age}>{person.bio}</Person>
           })}
