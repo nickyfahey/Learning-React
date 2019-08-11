@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
+import Person from './Person/Person';
 import './App.css';
+import Post from './Post/Post';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Person />
+      <Person />
+      <Post />
+      <Post />
+      <div className="card highlight">
+        .highlight from App.css
+      </div>
     </div>
   );
 }
