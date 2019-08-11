@@ -79,18 +79,18 @@ class App extends Component {
     // 1. npm install --save radium
     // 2. import Radium from 'radium';
     // 3. export default Radium(App);
-    const buttonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      // ':hover': {
-      //   backgroundColor: 'lightgreen',
-      //   color: 'black'
-      // }
-    };
+    // const buttonStyle = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color: 'black'
+    //   }
+    // };
 
 
     const pClasses = [];
@@ -106,6 +106,8 @@ class App extends Component {
 
     // Conditional Content "the javaScript way"
     let persons = null;
+    let btnClass = '';
+
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -121,11 +123,12 @@ class App extends Component {
         </div>
       );
 
-      buttonStyle.backgroundColor = 'red';
+      // buttonStyle.backgroundColor = 'red';
       // buttonStyle[':hover'] = {
       //   backgroundColor: 'lightpink',
       //   color: 'black'
       // };
+      btnClass = styles.Red; // string: class name
     }
 
     return (
@@ -154,7 +157,7 @@ class App extends Component {
 
         {/* no () on the button function so it is not executed immediately */}
         <button 
-          style={buttonStyle}
+          className={btnClass}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
 
         {/* Conditional Content: 
