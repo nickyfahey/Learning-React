@@ -75,12 +75,22 @@ class App extends Component {
   render() {
     // inline js style
     const buttonStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
     };
+
+
+    const pClasses = [];
+    if (this.state.persons.length < 3) {
+      pClasses.push('red');
+    }
+    if (this.state.persons.length < 2) {
+      pClasses.push('bold');
+    }
 
     // Conditional Content "the javaScript way"
     let persons = null;
@@ -98,12 +108,15 @@ class App extends Component {
           })}
         </div>
       );
+
+      buttonStyle.backgroundColor = 'red';
     }
 
     return (
       <div className="App">
         <h1>Everything is javaScript!</h1>
-        <p>This is JSX.</p>
+        {/* use join to get a valid css class list */}
+        <p className={pClasses.join(' ')}>This is JSX.</p>
 
         {/* using an anonymous function to pass data: */}
         {/* <button 
