@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, { StyleRoot } from 'radium';
 import './App.css';
 import Person from './Person/Person.js'
 
@@ -74,6 +75,10 @@ class App extends Component {
 
   render() {
     // inline js style
+    // Add the Radium higher order component to use sudo selectors:
+    // 1. npm install --save radium
+    // 2. import Radium from 'radium';
+    // 3. export default Radium(App);
     const buttonStyle = {
       backgroundColor: 'green',
       color: 'white',
@@ -81,6 +86,10 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
 
@@ -110,10 +119,15 @@ class App extends Component {
       );
 
       buttonStyle.backgroundColor = 'red';
+      buttonStyle[':hover'] = {
+        backgroundColor: 'lightpink',
+        color: 'black'
+      };
     }
 
     return (
-      <div className="App">
+      // Radium StyleRoot component needed for media queries to work
+      <StyleRoot><div className="App">
         <h1>Everything is javaScript!</h1>
         {/* use join to get a valid css class list */}
         <p className={pClasses.join(' ')}>This is JSX.</p>
@@ -163,10 +177,11 @@ class App extends Component {
         {/* <h2>Conditional Content "the javaScript way"</h2> */}
         {persons}
         
-      </div>
+      </div></StyleRoot>
     );
   }
  
 }
 
-export default App;
+// component export must use Radium for sudo selectors and media queries to work
+export default Radium(App);
