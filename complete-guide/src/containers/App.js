@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import Radium, { StyleRoot } from 'radium';
 import styles from './App.css';
-import Person from './Person/Person.js'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -74,91 +75,24 @@ class App extends Component {
   }
 
   render() {
-    // inline js style
-    // Add the Radium higher order component to use sudo selectors:
-    // 1. npm install --save radium
-    // 2. import Radium from 'radium';
-    // 3. export default Radium(App);
-    // const buttonStyle = {
-    //   backgroundColor: 'green',
-    //   color: 'white',
-    //   font: 'inherit',
-    //   border: '1px solid blue',
-    //   padding: '8px',
-    //   cursor: 'pointer',
-    //   ':hover': {
-    //     backgroundColor: 'lightgreen',
-    //     color: 'black'
-    //   }
-    // };
-
-
-    const pClasses = [];
-    if (this.state.persons.length < 3) {
-      // pClasses.push('red');
-      // use css modules:
-      pClasses.push(styles.red);
-    }
-    if (this.state.persons.length < 2) {
-      // pClasses.push('bold');
-      pClasses.push(styles.bold);
-    }
 
     // Conditional Content "the javaScript way"
     let persons = null;
-    let btnClass = '';
-
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            // if there is no key in a list react will re-render the entire list
-            return <Person 
-              key={person.id}
-              click={() => this.deletePersonHandler(index)}
-              changed={(event) => this.nameChangedHandler(event, person.id)}
-              name={person.name}
-              age={person.age}>{person.bio}</Person>
-          })}
-        </div>
-      );
-
-      // buttonStyle.backgroundColor = 'red';
-      // buttonStyle[':hover'] = {
-      //   backgroundColor: 'lightpink',
-      //   color: 'black'
-      // };
-      btnClass = styles.Red; // string: class name
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler} />;
     }
 
     return (
       // Radium StyleRoot component needed for media queries to work
       // <StyleRoot>
       <div className={styles.App}>
-        <h1>Everything is javaScript!</h1>
-        {/* use join to get a valid css class list */}
-        <p className={pClasses.join(' ')}>This is JSX.</p>
-
-        {/* using an anonymous function to pass data: */}
-        {/* <button 
-          style={buttonStyle}
-          onClick={() => this.updatePersonsHandler('Maxi')}>Update Persons 1</button> */}
-
-        {/* using bind to pass data: */}
-        {/* <button 
-          style={buttonStyle}
-          onClick={this.updatePersonsHandler.bind(this, 'Max!')}>Update Persons 2</button> */}
-
-        {/* Both these methods of passing parameters create a new function every render 
-        If there are no parameters do not bind in the onClick it will cause more re-rendering than necessary because .bind() is called every time creating a new function
-        If the handler needs to be dynamic consider caching the handlers if performance becomes a problem.
-        For more information see:
-        https://www.freecodecamp.org/news/the-best-way-to-bind-event-handlers-in-react-282db2cf1530/ */}
-
-        {/* no () on the button function so it is not executed immediately */}
-        <button 
-          className={btnClass}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        <Cockpit 
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
 
         {/* Conditional Content: 
         The persons are not added to the DOM until they are first shown; after that they hidden but remain in the DOM */}
