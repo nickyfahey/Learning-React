@@ -2,22 +2,38 @@ import React, { Component } from 'react';
 import './App.css';
 import UserInput from './UserInput/UserInput';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
+import CharComponent from './CharComponent/CharComponent';
 
 class App extends Component {
 
   state = {
-    inputText: '',
-    textLength: 0
+    inputText: 'A'
   }
 
   textChangedHandler = (event) => {
     this.setState({
-      inputText: event.target.value,
-      textLength: event.target.value.length
+      inputText: event.target.value
+    });
+  }
+
+  charClickHandler = (index) => {
+    let chars = this.state.inputText.split('');
+    chars.splice(index, 1);
+    this.setState({
+      inputText: chars.join('')
     });
   }
 
   render() {
+
+    const chars = this.state.inputText.split('');
+    const charComponents = chars.map((char, index) => {
+      return <CharComponent 
+        key={index} 
+        char={char}
+        onClick={() => this.charClickHandler(index)} />
+    });
+
     return (
       <div className="App">
         <ol>
@@ -34,7 +50,8 @@ class App extends Component {
           text={this.state.inputText}
           onChange={this.textChangedHandler} />
         <ValidationComponent
-          length={this.state.textLength} />
+          length={this.state.inputText.length} />
+        {charComponents}
 
       </div>
     );
