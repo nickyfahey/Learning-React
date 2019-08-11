@@ -28,6 +28,9 @@ class App extends Component {
 
     const chars = this.state.inputText.split('');
     const charComponents = chars.map((char, index) => {
+      // using the array index as the list item key is not ideal because it will change 
+      // when items are removed from the array causing the whole list to re-render anyway,
+      // but there is no good alternative here
       return <CharComponent 
         key={index} 
         char={char}
