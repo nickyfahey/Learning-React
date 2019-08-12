@@ -19,6 +19,11 @@ const FuncComp = (props) => {
     setTimeout(() => {
       console.log("pretend http request - mount FuncComp");
     }, 1000);
+    // cleanup function
+    // equivalent to componentWillUnmount
+    return () => {
+      console.log("[FuncComp.js] useEffect - cleanup");
+    }
   }, []);
 
   return (

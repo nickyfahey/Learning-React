@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import LifeSection from './LifeSection/LifeSection';
+import ToggleView from './ToggleView/ToggleView';
 import LifeCycleMethod from './LifeCycleMethod/LifeCycleMethod';
 import FuncComp from './FuncComp/FuncComp';
 
@@ -10,6 +10,7 @@ class App extends Component {
     showMounting: false,
     showUpdating: false,
     showUnmounting: false,
+    showFuncComp: false,
     someText1: "",
     someText2: ""
   }
@@ -42,6 +43,10 @@ class App extends Component {
     this.setState({showUnmounting: !this.state.showUnmounting})
   }
 
+  toggleFuncCompHandler = () => {
+    this.setState({showFuncComp: !this.state.showFuncComp})
+  }
+
   textChangeHandler1 = (event) => {
     this.setState({someText1: event.target.value})
   }
@@ -59,7 +64,7 @@ class App extends Component {
         <p>For more information see <a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle">The Component Lifecycle</a> and <a href="https://reactjs.org/docs/hooks-reference.html">Hooks API</a></p>
         <hr/>
 
-        <LifeSection 
+        <ToggleView 
           title="Mounting" 
           show={this.state.showMounting}
           toggle={this.toggleMountingHandler}>
@@ -75,9 +80,9 @@ class App extends Component {
           <LifeCycleMethod
             methodText="componentDidMount()" />
 
-        </LifeSection>
+        </ToggleView>
 
-        <LifeSection 
+        <ToggleView 
           title="Updating" 
           show={this.state.showUpdating}
           toggle={this.toggleUpdatingHandler}>
@@ -92,9 +97,9 @@ class App extends Component {
             methodText="getSnapshotBeforeUpdate(prevProps, prevState)" />
           <LifeCycleMethod methodText="componentDidUpdate(prevProps, prevState, snapshot)" />
 
-        </LifeSection>
+        </ToggleView>
 
-        <LifeSection 
+        <ToggleView 
           title="Unmounting" 
           show={this.state.showUnmounting}
           toggle={this.toggleUnmountingHandler}>
@@ -103,15 +108,20 @@ class App extends Component {
             methodText="componentWillUnmount()"
             desc="clean up before component removed from the DOM" />
 
-        </LifeSection>
+        </ToggleView>
 
         <hr/>
 
-        <FuncComp 
-          text1={this.state.someText1}
-          changed1={this.textChangeHandler1} 
-          text2={this.state.someText2}
-          changed2={this.textChangeHandler2} />
+        <ToggleView
+          title="React Hooks Example"
+          show={this.state.showFuncComp}
+          toggle={this.toggleFuncCompHandler}>
+          <FuncComp 
+            text1={this.state.someText1}
+            changed1={this.textChangeHandler1} 
+            text2={this.state.someText2}
+            changed2={this.textChangeHandler2} />
+        </ToggleView>
 
       </div>
     );
