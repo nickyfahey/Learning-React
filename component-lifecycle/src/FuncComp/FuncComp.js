@@ -15,11 +15,12 @@ const FuncComp = (props) => {
   useEffect(() => {
     console.log("[FuncComp.js] useEffect - props.text1 update");
     // Http request...
-    setTimeout(() => {
-      console.log("pretend http request - text1");
+    const timer = setTimeout(() => {
+      console.log("[FuncComp.js] pretend http request - text1");
     }, 1000);
     return () => {
       console.log("[FuncComp.js] useEffect - text1 cleanup");
+      clearTimeout(timer);
     }
   }, [props.text1]);
 
@@ -28,13 +29,14 @@ const FuncComp = (props) => {
   useEffect(() => {
     console.log("[FuncComp.js] useEffect - mount");
     // Http request...
-    setTimeout(() => {
-      console.log("pretend http request - mount FuncComp");
+    const timer = setTimeout(() => {
+      console.log("[FuncComp.js] pretend http request - mount FuncComp");
     }, 1000);
     // cleanup function
     // equivalent to componentWillUnmount
     return () => {
       console.log("[FuncComp.js] useEffect - unmount cleanup");
+      clearTimeout(timer);
     }
   }, []);
 
