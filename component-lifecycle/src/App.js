@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import './App.css';
 import LifeSection from './LifeSection/LifeSection';
 import LifeCycleMethod from './LifeCycleMethod/LifeCycleMethod';
+import FuncComp from './FuncComp/FuncComp';
 
 class App extends Component {
 
   state = {
     showMounting: false,
-    showUpdating: false
+    showUpdating: false,
+    someText1: "",
+    someText2: ""
   }
 
   constructor(props) {
@@ -32,6 +35,14 @@ class App extends Component {
 
   toggleUpdatingHandler = () => {
     this.setState({showUpdating: !this.state.showUpdating})
+  }
+
+  textChangeHandler1 = (event) => {
+    this.setState({someText1: event.target.value})
+  }
+
+  textChangeHandler2 = (event) => {
+    this.setState({someText2: event.target.value})
   }
 
   render() {
@@ -77,6 +88,14 @@ class App extends Component {
           <LifeCycleMethod methodText="componentDidUpdate(prevProps, prevState, snapshot)" />
 
         </LifeSection>
+
+        <hr/>
+
+        <FuncComp 
+          text1={this.state.someText1}
+          changed1={this.textChangeHandler1} 
+          text2={this.state.someText2}
+          changed2={this.textChangeHandler2} />
 
       </div>
     );
