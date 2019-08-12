@@ -8,6 +8,7 @@ My projects, assignments and notes from [React - The Complete Guide](https://www
 - [base-syntax--assignment](https://github.com/nickyfahey/Learning-React/tree/master/base-syntax--assignment) - practice the basics of react
 - [lists-conditional--assignment](https://github.com/nickyfahey/Learning-React/tree/master/lists-conditionals--assignment) - practice using react lists and conditional rendering
 - [css-modules](https://github.com/nickyfahey/Learning-React/tree/master/css-modules) - a simple example of using CSS modules
+- [component-lifecycle](https://github.com/nickyfahey/Learning-React/tree/master/component-lifecycle) - simple demonstration of lifecycle methods
 
 ## How to Install and Run a Project
 
