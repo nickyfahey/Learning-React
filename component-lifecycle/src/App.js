@@ -9,6 +9,23 @@ class App extends Component {
     showMounting: false,
     showUpdating: false
   }
+
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props, state);
+    return state;
+  }
+
+  // Default behavior is to re-render on every state change
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate", nextProps, nextState);
+    return true;
+  }
+
   toggleMountingHandler = () => {
     this.setState({showMounting: !this.state.showMounting})
   }
@@ -18,8 +35,9 @@ class App extends Component {
   }
 
   render() {
-  return (
-    <div className="App">
+    console.log("[App.js] render");
+    return (
+      <div className="App">
 
         <h1>React Component Lifecycle</h1>
         <p>For more information see: <a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle">The Component Lifecycle</a></p>
@@ -60,8 +78,23 @@ class App extends Component {
 
         </LifeSection>
 
-    </div>
-  );
+      </div>
+    );
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("[App.js] getSnapshotBeforeUpdate", prevProps, prevState);
+    return "snapshot value";
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("[App.js] componentDidUpdate", prevProps, prevState, snapshot);
+  }
+
+  componentDidMount() {
+    console.log("[App.js] componentDidMount");
+  }
+
 }
 
 export default App;
