@@ -115,7 +115,8 @@ class App extends Component {
         <ToggleView
           title="React Hooks Example"
           show={this.state.showFuncComp}
-          toggle={this.toggleFuncCompHandler}>
+          toggle={this.toggleFuncCompHandler}
+          alwaysUpdate="true">
           <FuncComp 
             text1={this.state.someText1}
             changed1={this.textChangeHandler1} 

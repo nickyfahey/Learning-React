@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 
-class LifeSection extends Component {
+class ToggleView extends Component {
   
   // Default behavior is to re-render on every state change
   shouldComponentUpdate(nextProps, nextState) {
-    console.log("[LifeSection.js] shouldComponentUpdate - " + this.props.title, nextProps, nextState);
+    console.log("[ToggleView.js] shouldComponentUpdate - " + this.props.title, nextProps, nextState);
+    if (this.props.alwaysUpdate) return true;
     return nextProps.show !== this.props.show;
   }
 
   render () {
-    console.log("[LifeSection.js] render - " + this.props.title);
+    console.log("[ToggleView.js] render - " + this.props.title);
     let methods = null;
     let buttonText = "";
     if (this.props.show) {
@@ -30,4 +31,4 @@ class LifeSection extends Component {
 
 }
 
-export default LifeSection;
+export default ToggleView;
