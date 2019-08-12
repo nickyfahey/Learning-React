@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     showMounting: false,
     showUpdating: false,
+    showUnmounting: false,
     someText1: "",
     someText2: ""
   }
@@ -37,6 +38,10 @@ class App extends Component {
     this.setState({showUpdating: !this.state.showUpdating})
   }
 
+  toggleUnmountingHandler = () => {
+    this.setState({showUnmounting: !this.state.showUnmounting})
+  }
+
   textChangeHandler1 = (event) => {
     this.setState({someText1: event.target.value})
   }
@@ -51,7 +56,7 @@ class App extends Component {
       <div className="App">
 
         <h1>React Component Lifecycle</h1>
-        <p>For more information see: <a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle">The Component Lifecycle</a></p>
+        <p>For more information see <a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle">The Component Lifecycle</a> and <a href="https://reactjs.org/docs/hooks-reference.html">Hooks API</a></p>
         <hr/>
 
         <LifeSection 
@@ -86,6 +91,17 @@ class App extends Component {
           <LifeCycleMethod 
             methodText="getSnapshotBeforeUpdate(prevProps, prevState)" />
           <LifeCycleMethod methodText="componentDidUpdate(prevProps, prevState, snapshot)" />
+
+        </LifeSection>
+
+        <LifeSection 
+          title="Unmounting" 
+          show={this.state.showUnmounting}
+          toggle={this.toggleUnmountingHandler}>
+
+          <LifeCycleMethod 
+            methodText="componentWillUnmount()"
+            desc="clean up before component removed from the DOM" />
 
         </LifeSection>
 
