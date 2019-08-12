@@ -1,5 +1,12 @@
-# Statefull Component Lifecycle
+# Component Lifecycle
 
-A simple app to demonstrate the lifecycle methods of class based components.
+A simple app that demonstrates:
+- Lifecycle methods of class based components
+- How to use useEffect to manage the lifecycle of functional components
+- React.memo and PureComponent
 
-For more information on lifecycle methods see: [The Component Lifecycle](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
+More information:
+- [The Component Lifecycle](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
+- [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect)
+- [React.memo](https://reactjs.org/docs/react-api.html#reactmemo)
+- [PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent)
