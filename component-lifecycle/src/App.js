@@ -3,6 +3,7 @@ import './App.css';
 import ToggleView from './ToggleView/ToggleView';
 import LifeCycleMethod from './LifeCycleMethod/LifeCycleMethod';
 import FuncComp from './FuncComp/FuncComp';
+import PureToggleView from './PureToggleView/PureToggleView';
 
 class App extends Component {
 
@@ -11,8 +12,10 @@ class App extends Component {
     showUpdating: false,
     showUnmounting: false,
     showFuncComp: false,
+    showPureComp: false,
     someText1: "",
-    someText2: ""
+    someText2: "",
+    someText3: ""
   }
 
   constructor(props) {
@@ -47,12 +50,20 @@ class App extends Component {
     this.setState({showFuncComp: !this.state.showFuncComp})
   }
 
+  togglePureCompHandler = () => {
+    this.setState({showPureComp: !this.state.showPureComp})
+  }
+
   textChangeHandler1 = (event) => {
     this.setState({someText1: event.target.value})
   }
 
   textChangeHandler2 = (event) => {
     this.setState({someText2: event.target.value})
+  }
+
+  textChangeHandler3 = (event) => {
+    this.setState({someText3: event.target.value})
   }
 
   render() {
@@ -123,6 +134,17 @@ class App extends Component {
             text2={this.state.someText2}
             changed2={this.textChangeHandler2} />
         </ToggleView>
+
+        <hr/>
+
+        <PureToggleView
+          title="Pure Component"
+          show={this.state.showPureComp} 
+          toggle={this.togglePureCompHandler}
+          text={this.state.someText3}
+          changed={this.textChangeHandler3} />
+
+        <hr />
 
       </div>
     );

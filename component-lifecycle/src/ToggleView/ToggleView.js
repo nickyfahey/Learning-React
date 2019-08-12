@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 class ToggleView extends Component {
+  // using props.children (if not just a string) in a PureComponent 
+  // will mean the PureComponents shouldComponentUpdate will always
+  // return true making it a pointless check
+  // https://blog.cloudboost.io/react-purecomponents-children-979e3da15ba8
   
   // Default behavior is to re-render on every state change
   shouldComponentUpdate(nextProps, nextState) {
