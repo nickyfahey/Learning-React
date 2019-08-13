@@ -8,7 +8,8 @@ const persons = (props) => props.persons.map((person, index) => {
     click={() => props.clicked(index)}
     changed={(event) => props.changed(event, person.id)}
     name={person.name}
-    age={person.age}>{person.bio}</Person>
+    age={person.age}
+    focus={person.focus}>{person.bio}</Person>
 });
 
 export default persons;

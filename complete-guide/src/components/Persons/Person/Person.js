@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 // use Radium for styles:
 // import Radium from 'radium';
 // use CSS modules for styles
@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 
 // react will update the DOM if props changes
 
-const person = (props) => {
+class Person extends Component {
 
   // use radium to use media queries in inline styles
   // const style = {
@@ -23,21 +23,39 @@ const person = (props) => {
   //   }
   // };
 
-  return (
-    <div className={styles.Person} /*style={style}*/> 
-      <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
-      <p>{props.children}</p>
-      <input type="text" onChange={props.changed} value={props.name} />
-    </div>
-  )
+  constructor(props) {
+    super(props);
+    this.inputElementRef = React.createRef();
+  }
+
+  componentDidMount() {
+    // this.inputElement.focus();
+    if (this.props.focus) this.inputElementRef.current.focus();
+  }
+
+  render() {
+    return (
+      <div className={styles.Person} /*style={style}*/> 
+        <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
+        <p>{this.props.children}</p>
+        <input 
+          // ref={(el) => { this.inputElement = el }}
+          ref={this.inputElementRef}
+          type="text" 
+          onChange={this.props.changed} 
+          value={this.props.name} />
+      </div>
+    );
+  }
 }
 
-person.propTypes = {
+Person.propTypes = {
   onClick: PropTypes.func,
   onChange: PropTypes.func,
   name: PropTypes.string,
-  age: PropTypes.number
+  age: PropTypes.number,
+  focus: PropTypes.bool
 };
 
 // export default Radium(person);
-export default person;
+export default Person;

@@ -15,9 +15,10 @@ class App extends Component {
   // changing state will cause react to render the DOM
   state = {
     persons: [
-      { id: 'qqwertyui', name: 'Nicky', age: 30, bio: 'I am awesome!' },
-      { id: 'zxcvbnmnm', name: 'Sam', age: 23 },
-      { id: 'asdfghjkl', name: 'Max', age: 28 }
+      { id: 'qqwertyui', name: 'Nicky', age: 30, 
+        bio: 'I am awesome!', focus: true },
+      { id: 'zxcvbnmnm', name: 'Sam', age: 23, focus: false },
+      { id: 'asdfghjkl', name: 'Max', age: 28, focus: false }
     ],
     otherStateProp: "hello",
     showPersons: false,
