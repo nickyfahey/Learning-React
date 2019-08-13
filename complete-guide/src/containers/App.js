@@ -85,6 +85,15 @@ class App extends Component {
         changed={this.nameChangedHandler} />;
     }
 
+    // In newer versions of react you can just use
+    // <>
+    //  ...
+    // </>
+    const frag = <React.Fragment>
+      <p>Hello</p>
+      <p>Fragment!</p>
+    </React.Fragment>
+
     return (
       // Radium StyleRoot component needed for media queries to work
       // <StyleRoot>
@@ -117,6 +126,8 @@ class App extends Component {
 
         {/* <h2>Conditional Content "the javaScript way"</h2> */}
         {persons}
+
+        {frag}
         
       </div>
       // </StyleRoot>
