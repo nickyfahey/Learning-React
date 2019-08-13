@@ -20,7 +20,8 @@ class App extends Component {
       { id: 'asdfghjkl', name: 'Max', age: 28 }
     ],
     otherStateProp: "hello",
-    showPersons: false
+    showPersons: false,
+    changeCounter: 0
   }
 
   // using function syntax for methods would lead to errors if you tried to use 'this' in the method because it will no longer refer to the class
@@ -51,7 +52,18 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
+    // setState schedules a state change that is not guaranteed to execute immediately
+    // this.setState({ 
+    //   persons: persons,
+    //   changeCounter: this.state.changeCounter + 1 // wrong, may be unexpected state
+    // });
+    this.setState((prevState, props) => { 
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1 
+        // guaranteed to be the expected previous state
+      }
+    });
   }
   
   togglePersonsHandler = () => {
