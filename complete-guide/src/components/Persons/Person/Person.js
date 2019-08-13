@@ -7,6 +7,9 @@ import styles from './Person.css';
 // https://facebook.github.io/create-react-app/docs/adding-a-css-modules-stylesheet
 // Note: this project is using an older version of create-react-app
 
+// npm install --save prop-types
+import PropTypes from 'prop-types';
+
 // use function based components as often as possible because they do not have state, and state should be kept to a minimum
 
 // react will update the DOM if props changes
@@ -28,6 +31,13 @@ const person = (props) => {
     </div>
   )
 }
+
+person.propTypes = {
+  onClick: PropTypes.func,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number
+};
 
 // export default Radium(person);
 export default person;
