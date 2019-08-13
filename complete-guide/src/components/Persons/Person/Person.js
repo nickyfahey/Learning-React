@@ -7,6 +7,7 @@ import styles from './Person.css';
 // https://facebook.github.io/create-react-app/docs/adding-a-css-modules-stylesheet
 // Note: this project is using an older version of create-react-app
 
+import AuthContext from '../../../context/auth-context';
 // npm install --save prop-types
 import PropTypes from 'prop-types';
 
@@ -36,6 +37,12 @@ class Person extends Component {
   render() {
     return (
       <div className={styles.Person} /*style={style}*/> 
+        <AuthContext.Consumer>
+          {(context) => 
+            context.authenticated 
+              ? <p>Authenticated</p> : <p>Please log in</p>}
+        </AuthContext.Consumer>
+        
         <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
         <p>{this.props.children}</p>
         <input 

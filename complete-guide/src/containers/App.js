@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styles from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
 
@@ -22,8 +23,9 @@ class App extends Component {
     ],
     otherStateProp: "hello",
     showPersons: false,
-    changeCounter: 0
-  }
+    changeCounter: 0,
+    authenticated: false
+  };
 
   // using function syntax for methods would lead to errors if you tried to use 'this' in the method because it will no longer refer to the class
 
@@ -65,12 +67,12 @@ class App extends Component {
         // guaranteed to be the expected previous state
       }
     });
-  }
+  };
   
   togglePersonsHandler = () => {
     const isShowing = this.state.showPersons;
     this.setState({showPersons: !isShowing});
-  }
+  };
 
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons;
@@ -85,7 +87,11 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
-  }
+  };
+
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  };
 
   render() {
 
@@ -111,34 +117,39 @@ class App extends Component {
       // Radium StyleRoot component needed for media queries to work
       // <StyleRoot>
       <div className={styles.App}>
-        <Cockpit 
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonsHandler} />
+        <AuthContext.Provider value={{
+          authenticated: this.state.authenticated,
+          login: this.loginHandler
+        }}>
+          <Cockpit 
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clicked={this.togglePersonsHandler} />
 
-        {/* Conditional Content: 
-        The persons are not added to the DOM until they are first shown; after that they hidden but remain in the DOM */}
+          {/* Conditional Content: 
+          The persons are not added to the DOM until they are first shown; after that they hidden but remain in the DOM */}
 
-        {/* <h2>Conditional Content Using Ternary Operator</h2>
+          {/* <h2>Conditional Content Using Ternary Operator</h2>
 
-        { this.state.showPersons ?
-          <div>
-            <Person 
-              name={this.state.persons[0].name} 
-              age={this.state.persons[0].age}>I am awesome!</Person>
-            <Person 
-              name={this.state.persons[1].name} 
-              age={this.state.persons[1].age}
-              changed={this.nameChangedHandler} />
-            <Person 
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age} />
-          </div>
-          : null
-        } */}
+          { this.state.showPersons ?
+            <div>
+              <Person 
+                name={this.state.persons[0].name} 
+                age={this.state.persons[0].age}>I am awesome!</Person>
+              <Person 
+                name={this.state.persons[1].name} 
+                age={this.state.persons[1].age}
+                changed={this.nameChangedHandler} />
+              <Person 
+                name={this.state.persons[2].name}
+                age={this.state.persons[2].age} />
+            </div>
+            : null
+          } */}
 
-        {/* <h2>Conditional Content "the javaScript way"</h2> */}
-        {persons}
+          {/* <h2>Conditional Content "the javaScript way"</h2> */}
+          {persons}
+        </AuthContext.Provider>
 
         {frag}
         
