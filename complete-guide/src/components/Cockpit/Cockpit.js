@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './Cockpit.css';
 
 const cockpit = (props) => {
+
+  const toggleBtnRef = useRef(null);
+
+  useEffect(() => {
+    toggleBtnRef.current.click();
+  }, []);
 
   // Inline js style
   // Add the Radium higher order component to use sudo selectors:
@@ -66,6 +72,7 @@ const cockpit = (props) => {
 
       {/* no () on the button function so it is not executed immediately */}
       <button 
+        ref={toggleBtnRef}
         className={btnClass}
         onClick={props.clicked}>Toggle Persons</button>
     </div>
