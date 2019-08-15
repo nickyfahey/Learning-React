@@ -1,4 +1,4 @@
-.SideDraw {
+.SideDrawer {
   position: fixed;
   width: 200px;
   min-width: 70%;
@@ -13,7 +13,7 @@
 }
 
 @media (min-width: 500px) {
-  .SideDraw {
+  .SideDrawer {
     display: none;
   }
 }

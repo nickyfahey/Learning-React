@@ -6,7 +6,9 @@ import NavItems from '../NavItems/NavItems';
 const toolbar = (props) => {
   return (
     <header className={styles.Toolbar}>
-      <div>MENU</div>
+      <button 
+        className={`${styles.MobileOnly} ${styles.MenuButton}`}
+        onClick={props.openSideDrawer}>MENU</button>
       <div className={styles.Logo}>
         <Logo />
       </div>

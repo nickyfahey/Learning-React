@@ -21,8 +21,21 @@
   height: 80%;
 }
 
+.MenuButton {
+  background-color: transparent;
+  border: 0;
+  font-size: 1.2rem;
+  color: white;
+}
+
 @media(max-width: 499px) {
   .DesktopOnly {
+    display: none;
+  }
+}
+
+@media(min-width: 500px) {
+  .MobileOnly {
     display: none;
   }
 }
