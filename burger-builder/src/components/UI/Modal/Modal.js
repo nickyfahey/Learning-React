@@ -3,6 +3,8 @@ import styles from './Modal.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 
 const model = (props) => {
+  console.log("[Modal] render");
+  
   return (
     <>
       <Backdrop show={props.show} clicked={props.modalClosed} />
@@ -18,4 +20,6 @@ const model = (props) => {
   );
 }
 
-export default model;
+export default React.memo(model, (prevProps, nextProps) => {
+  return prevProps.show === nextProps.show;
+});
