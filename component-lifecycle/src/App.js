@@ -8,11 +8,6 @@ import PureToggleView from './PureToggleView/PureToggleView';
 class App extends Component {
 
   state = {
-    showMounting: false,
-    showUpdating: false,
-    showUnmounting: false,
-    showFuncComp: false,
-    showPureComp: false,
     someText1: "",
     someText2: "",
     someText3: ""
@@ -32,26 +27,6 @@ class App extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[App.js] shouldComponentUpdate", nextProps, nextState);
     return true;
-  }
-
-  toggleMountingHandler = () => {
-    this.setState({showMounting: !this.state.showMounting})
-  }
-
-  toggleUpdatingHandler = () => {
-    this.setState({showUpdating: !this.state.showUpdating})
-  }
-
-  toggleUnmountingHandler = () => {
-    this.setState({showUnmounting: !this.state.showUnmounting})
-  }
-
-  toggleFuncCompHandler = () => {
-    this.setState({showFuncComp: !this.state.showFuncComp})
-  }
-
-  togglePureCompHandler = () => {
-    this.setState({showPureComp: !this.state.showPureComp})
   }
 
   textChangeHandler1 = (event) => {
@@ -75,10 +50,7 @@ class App extends Component {
         <p>For more information see <a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle">The Component Lifecycle</a> and <a href="https://reactjs.org/docs/hooks-reference.html">Hooks API</a></p>
         <hr/>
 
-        <ToggleView 
-          title="Mounting" 
-          show={this.state.showMounting}
-          toggle={this.toggleMountingHandler}>
+        <ToggleView title="Mounting">
 
           <LifeCycleMethod 
             methodText="constructor(props)"
@@ -93,10 +65,7 @@ class App extends Component {
 
         </ToggleView>
 
-        <ToggleView 
-          title="Updating" 
-          show={this.state.showUpdating}
-          toggle={this.toggleUpdatingHandler}>
+        <ToggleView title="Updating">
 
           <LifeCycleMethod 
             methodText="static getDerivedStateFromProps(props, state)" />
@@ -110,10 +79,7 @@ class App extends Component {
 
         </ToggleView>
 
-        <ToggleView 
-          title="Unmounting" 
-          show={this.state.showUnmounting}
-          toggle={this.toggleUnmountingHandler}>
+        <ToggleView title="Unmounting">
 
           <LifeCycleMethod 
             methodText="componentWillUnmount()"
@@ -125,8 +91,6 @@ class App extends Component {
 
         <ToggleView
           title="React Hooks Example"
-          show={this.state.showFuncComp}
-          toggle={this.toggleFuncCompHandler}
           dynamicChildren="true">
           <FuncComp 
             text1={this.state.someText1}
@@ -139,8 +103,6 @@ class App extends Component {
 
         <PureToggleView
           title="Pure Component"
-          show={this.state.showPureComp} 
-          toggle={this.togglePureCompHandler}
           text={this.state.someText3}
           changed={this.textChangeHandler3} />
 

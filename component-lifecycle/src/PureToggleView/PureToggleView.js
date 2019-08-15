@@ -2,11 +2,21 @@ import React, {PureComponent} from 'react';
 
 class PureToggleView extends PureComponent {
 
+  state = {
+    show: false
+  }
+
+  toggleShowHandler = () => {
+    this.setState( (prevState) => {
+      return { show: !prevState.show }
+    });
+  }
+
   render() {
     console.log("[PureToggleView.js] render - " + this.props.title);
     let content = null;
     let buttonText = "";
-    if (this.props.show) {
+    if (this.state.show) {
       content = (
         <div>
           <input type="text" 
@@ -25,7 +35,7 @@ class PureToggleView extends PureComponent {
     return (
       <div>
         <h2>{this.props.title}</h2>
-        <button onClick={this.props.toggle}>{buttonText}</button>
+        <button onClick={this.toggleShowHandler}>{buttonText}</button>
         {content}
       </div>
     );
