@@ -29,8 +29,16 @@ class BurgerBuilder extends Component {
   componentDidMount () {
     axios.get('ingredients.json')
       .then(response => {
-        // console.log(response.data);
-        this.setState({ingredients: response.data});
+        // response data: { ingredientKey: { count: n, pos: n } }
+        let ingArray = Object.entries(response.data)
+          .sort((a, b) => a[1].pos - b[1].pos);
+
+        let ingredients = {};
+        for (let i in ingArray) {
+          ingredients[ingArray[i][0]] = ingArray[i][1].count;
+        }
+        
+        this.setState({ingredients: ingredients});
       })
       .catch(err => { 
         this.setState({ error: true });
