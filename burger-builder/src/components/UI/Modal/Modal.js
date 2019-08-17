@@ -20,6 +20,7 @@ const model = (props) => {
   );
 }
 
-export default React.memo(model, (prevProps, nextProps) => {
-  return prevProps.show === nextProps.show;
+export default React.memo(model, (prevProps, nextProps) => {  
+  // if the modal is not showing only re-render to show it
+  return !nextProps.show && (prevProps.show === nextProps.show);
 });
