@@ -15,7 +15,7 @@
   text-decoration: none;
 }
 
-.Navigation a.active {
+.Navigation :global a.active {
   text-decoration: underline;
   color: coral;
 }

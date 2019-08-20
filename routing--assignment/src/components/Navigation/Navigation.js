@@ -6,12 +6,8 @@ const navigation = () => {
   return (
     <nav className={styles.Navigation}>
       <ul>
-        <li><NavLink 
-          to="/users" 
-          activeClassName={styles.active}>Users</NavLink></li>
-        <li><NavLink 
-          to="/courses"
-          activeClassName={styles.active}>Courses</NavLink></li>
+        <li><NavLink to="/users">Users</NavLink></li>
+        <li><NavLink to="/courses">Courses</NavLink></li>
       </ul>
     </nav>
   );
