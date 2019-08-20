@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import Courses from './containers/Courses/Courses';
 import Users from './containers/Users/Users';
+import Navigation from './components/Navigation/Navigation';
+import NotFound from './components/NotFound/NotFound';
 
 class App extends Component {
   render () {
@@ -17,6 +20,19 @@ class App extends Component {
           <li>Add a 404 error page and render it for any unknown routes</li>
           <li>Redirect requests to /all-courses to /courses (=> Your "Courses" page)</li>
         </ol>
+
+        <BrowserRouter>
+          <header>
+            <Navigation />
+          </header>
+
+          <Switch>
+            <Route path="/users" component={Users} />
+            <Route path="/courses" component={Courses} />
+            <Redirect from="/all-courses" to="/courses" />
+            <Route component={NotFound} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

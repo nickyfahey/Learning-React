@@ -1,0 +1,21 @@
+.Navigation {
+  background-color: #eeeeee;
+  padding: 10px;
+}
+
+.Navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Navigation a {
+  text-decoration: none;
+}
+
+.Navigation a.active {
+  text-decoration: underline;
+  color: coral;
+}
