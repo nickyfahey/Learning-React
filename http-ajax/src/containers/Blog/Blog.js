@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Posts from './Posts/Posts';
 
-import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
+import { Route, NavLink, Switch /*, Redirect */ } from 'react-router-dom';
 import NewPost from './NewPost/NewPost';
 import './Blog.css';
 
@@ -30,7 +30,11 @@ class Blog extends Component {
 				<Switch>
 					<Route path="/new-post" component={NewPost} />
 					<Route path="/posts" component={Posts} />
-					<Redirect from="/" to="/posts" />
+					{/* catch all route with no path; must be last */}
+					<Route render={() => <h1>Not found</h1>} />
+					{/* Redirect from / will not work with the above
+					*** or visa-versa as from="/" also catches all paths */}
+					{/* <Redirect from="/" to="/posts" /> */}
 				</Switch>
 			</div>
 		);
