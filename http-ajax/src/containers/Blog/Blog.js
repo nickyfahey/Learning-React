@@ -1,75 +1,36 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
-// use axios instance defined in axios.js
-import axios from '../../axios';
+import Posts from './Posts/Posts';
 
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+import { Route, NavLink, Switch } from 'react-router-dom';
+import NewPost from './NewPost/NewPost';
 import './Blog.css';
 
 class Blog extends Component {
 
-	state = {
-		posts: [],
-		selectedPostId: null,
-		error: false
-	}
-
-	componentDidMount () {
-		axios.get('/posts')
-			.then(response => {
-				// console.log(response);
-
-				// this would normally be done by changing the request to get back 
-				// what we want, but the dummy backend doesn't have the option
-				const posts = response.data.slice(0, 4);
-				const updatedPosts = posts.map(post => {
-					return {
-						...post,
-						author: 'Nicky'
-					}
-				});
-
-				this.setState({ posts: updatedPosts});
-			})
-			.catch(error => {
-				// console.log(error);
-				this.setState({error: true});
-			});
-	}
-
-	postSelectedHandler = (id) => {
-		this.setState({ selectedPostId: id });
-	}
-
 	render () {
-
-		let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>
-
-		if (!this.state.error) {
-			posts = this.state.posts.map(post => {
-				return (
-					<Post 
-						key={post.id} 
-						title={post.title}
-						author={post.author}
-						clicked={() => this.postSelectedHandler(post.id)} />
-				);
-			});
-		}
-
 		return (
-			<div>
-				<section className="Posts">
-					{posts}
-				</section>
-				<section>
-					<FullPost id={this.state.selectedPostId} />
-				</section>
-				<section>
-					<NewPost />
-				</section>
+			<div className="Blog">
+				<header>
+					<nav>
+						<ul>
+							{/* Using Link prevents the app from reloading */}
+							{/* exact NavLink means the url has to be exact to 
+							get the .active class */}
+							<li><NavLink to="/posts" exact>Posts</NavLink></li>
+							<li><NavLink to="/new-post">New Post</NavLink></li>
+							<li><NavLink to={{
+								pathname: '/example',
+								hash: 'submit',
+								search: 'quick-submit=true'
+							}}>Example Link</NavLink></li>
+						</ul>
+					</nav>
+				</header>
+				{/* Use Switch to tell react to render only the first matching route */}
+				<Switch>
+					<Route path="/new-post" component={NewPost} />
+					<Route path="/posts" component={Posts} />
+				</Switch>
 			</div>
 		);
 	}
