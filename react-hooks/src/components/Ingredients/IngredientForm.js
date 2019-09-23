@@ -4,6 +4,9 @@ import Card from "../UI/Card";
 import "./IngredientForm.css";
 
 const IngredientForm = React.memo((props) => {
+  // hooks must be used at the root level of the component and not in
+  // any inner functions or other code block (ie for or if)
+
   // state in useState can be any type not just object
   // you can have multiple states with useState
   const [title, setTitle] = useState("");
