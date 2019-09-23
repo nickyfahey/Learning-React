@@ -5,10 +5,9 @@ import "./IngredientForm.css";
 
 const IngredientForm = React.memo((props) => {
   // state in useState can be any type not just object
-  const [state, setState] = useState({
-    title: "",
-    amount: ""
-  });
+  // you can have multiple states with useState
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -24,20 +23,22 @@ const IngredientForm = React.memo((props) => {
             <input
               type="text"
               id="title"
-              value={state.title}
+              value={title}
               onChange={(event) => {
                 // Get the value from the event so closure for the
                 // setState function is of the variable newTitle and
                 // not the event object.
-                const newTitle = event.target.value;
+                // const newTitle = event.target.value;
                 // Closure over the event object causes an error because
                 // react's synthetic events reuse event objects so the
                 // event object may be out of sync when the state is set.
                 // https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/15700330#questions/7881106
-                setState((prevState) => ({
-                  title: newTitle,
-                  amount: prevState.amount
-                }));
+                // setState((prevState) => ({
+                //   title: newTitle,
+                //   amount: prevState.amount
+                // }));
+                // ^^ not needed with multiple states
+                setTitle(event.target.value);
               }}
             />
           </div>
@@ -47,14 +48,8 @@ const IngredientForm = React.memo((props) => {
             <input
               type="number"
               id="amount"
-              value={state.amount}
-              onChange={(event) => {
-                const newAmount = event.target.value;
-                setState((prevState) => ({
-                  amount: newAmount,
-                  title: prevState.title
-                }));
-              }}
+              value={amount}
+              onChange={(event) => setAmount(event.target.value)}
             />
           </div>
 
